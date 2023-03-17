@@ -9,11 +9,11 @@ Interactive Tableau Dashboards: [Infections & Deaths](https://public.tableau.com
 
 ## Data and Exploration
 The dataset has over 70 columns of information, but I mainly explore the following at the global, continent and country levels:  
--Number of cases vs deaths (death rate)  
--Number of cases vs population (infection rate)  
--Number of vaccinations vs population (% population vaccinated)  
--Partially vs Fully Vaccinated populations (% population partial vs full vaccination)  
--GDP vs % of population that has received at least 1 vaccination  
+- Number of cases vs deaths (death rate)  
+- Number of cases vs population (infection rate)  
+- Number of vaccinations vs population (% population vaccinated)  
+- Partially vs Fully Vaccinated populations (% population partial vs full vaccination)  
+- GDP vs % of population that has received at least 1 vaccination  
 
 ## Data Visualisation  
 __Infections and Deaths Dashboard__
