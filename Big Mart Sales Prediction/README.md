@@ -27,4 +27,41 @@ __Outlet_Type__: whether the outlet is just a grocery store or some sort of supe
 __Item_Outlet_Sales__: sale of the product in the particular store. <ins>This is also the outcome variable to be predicted</ins>  
 
 ## Data Cleaning/Exploration/Visualisation
-I join the two-part dataset to get the full pictures when doing exploration. 
+I join the two-part dataset to get the full pictures when doing exploration.    
+
+#### Data Overview
+![Data Overview](imgs/data_overview.png)  
+
+There are null values which I look to clean up before exploring.  
+![Null values](imgs/null_values.png)  
+
+2439 missing values for Item_Weight  
+4016 missing values for Outlet_Size  
+The 5681 missing Item_Outlet_Sales values is the target variable to be predicted in test.csv  
+
+Some summary statistics of our features:  
+![Summary Statistics](imgs/summary_statistics.png)  
+
+#### Target variable Item_Outlet_Sales distribution:   
+![Item Outlet Sales distribution](imgs/target_variable_hist.png)  
+
+Target variable is right skewed.  
+<br>
+
+#### Numeric Features distribution:
+![Numeric Features Distribution](imgs/numeric_features_distribution)  
+Item_Weight has some missing values. Based on the distribution, we can just go with a simple mean imputation.  
+Item_Visibility has an large number of 0s. Also, 0% Item Visibility doesn't quite make sense. A segment of items with <2000 sales have more visibility (0.2 - 0.34) than the majority of items.  
+Item_MRP (Max Retail Price) has a positive linear relationship with Item_Outlet_Sales. There also seems to be 4 distinguished Item_MRP ranges.  
+<br>
+
+#### Outlet Establishment Year distribution:
+![Outlet Establishment Year Distribution](imgs/outlet_establishment_year_dist)  
+
+
+
+
+
+
+
+
