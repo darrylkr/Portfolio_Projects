@@ -50,9 +50,9 @@ Target variable is right skewed.
 
 #### Numeric Features distribution:
 ![Numeric Features Distribution](imgs/numeric_features_distribution.png)  
-Item_Weight has some missing values. Based on the distribution, we can just go with a simple mean imputation.  
-Item_Visibility has an large number of 0s. Also, 0% Item Visibility doesn't quite make sense. A segment of items with <2000 sales have more visibility (0.2 - 0.34) than the majority of items.  
-Item_MRP (Max Retail Price) has a positive linear relationship with Item_Outlet_Sales. There also seems to be 4 distinguished Item_MRP ranges.  
+- Item_Weight has some missing values. Based on the distribution, we can just go with a simple mean imputation.  
+- Item_Visibility has an large number of 0s. Also, 0% Item Visibility doesn't quite make sense. A segment of items with <2000 sales have more visibility (0.2 - 0.34) than the majority of items.  
+- Item_MRP (Max Retail Price) has a positive linear relationship with Item_Outlet_Sales. There also seems to be 4 distinguished Item_MRP ranges.  
 <br>
 
 #### Categorical Features Overview: 
@@ -144,9 +144,9 @@ Create pivot table to get mean weight per Item_Identifier.
 ![Updated Item Weight Distribution](imgs/updated_item_weight_distribution.png)
 <br>
 
-### Outlet Size
-![Null Outlet Sizes](imgs/outlet_size_null.png)
-Initially, I thought Outlet_Size might be associated with the Outlet_Location_Type and/or Outlet_Type in that:  
+### Outlet Size  
+![Null Outlet Sizes](imgs/outlet_size_null.png)  
+Initially, I thought Outlet_Size might be associated with the Outlet_Location_Type and/or Outlet_Type in that:    
 
 - Larger outlet sizes open up the possibility for more traffic and are likely to have a wider variety of items which can have an effect on sales.  
 - Customers from Tier 1 Cities may have more spending power than Tier 2 and Tier 3 and so placing a large outlet in Tier 1 Cities may be a strategic decision to capitalize on the higher customer spendings to improve sales.  
@@ -201,16 +201,56 @@ The distinguishing factor between the two and the rest of the outlets is the Out
 
 
 // impute item visibility 0 with item visibility mean by outlet_type to factor for grocery store visibilities being different //
+#### Imputing missing Item Visibility rows with mean from pivot table
+![Item Visibility Mean](imgs/item_visibility_mean_pivot.png)
+<br>
+Before imputation:  
+![Item Visibility Zeros](imgs/item_visibility_zero.png)
+<br>
+After imputation:  
+![Item Visibility after imputation](imgs/item_visibility_after_impute.png)
+<br>
+- All outlets are close to the full display area utilization after mean imputation.     
+- OUT010 and OUT019 having 97% utilization might be the difference due to 'Grocery Store' Outlet_Types usually having a higher visibility % compared to the other Outlet_Types as previously discovered.  
+<br>
+
+Try imputation by Outlet_Type/Item_Identifier to see if we can get a total visibility closer to 100%.  
+![Item Visibility mean by Outlet Type](imgs/item_visibility_mean_by_outlet_type_pivot.png)
+<br>
+
+![Item Visibility after imputing visibility by Outlet Type](imgs/item_visibility_after_impute_outlet_type.png)
+40 Items that couldn't be imputed due to lack of (Grocery Store,Item_Identifier) combination from the other grocery store that makes up the pivot table used for imputation.  
+These remaining 40 Items will be imputed by the Item_Visibility mean by Item_Identifier.  
+
+#### Total Item Visibility per Outlet after all imputations
+![Item Visibility Totals after all imputations](imgs/item_visibility_totals_new.png)  
+Item_Visibility values are closer to 100% as compared to before.  
+<br>
+
+#### Item Visibility Distributions after imputation
+![Item Visibility distribution after imputation](imgs/item_visibility_distribution_after_imputation.png)
+<br>
+
+#### Item Visibility (0.2 - 0.34)
+Lastly, we investigate the segment of items with <2000 sales that have more visibility (0.2 - 0.34) than the majority of items:  
+![Item Visibility over 0.189](imgs/item_visibility_over_0.189.png)
+The items with Item_Visibility > 0.2 are from Outlet_Type 'Grocery Store' as they have fewer items (900+) compared to the supermarkets (1500+).   
+
+### Item Fat Content
+First we look at the categories in Item_Type:  
+![Item Type Categories](imgs/item_type_categories.png)
+<br>
 
 
 
+
+
 ![](imgs/.png)
 ![](imgs/.png)
 ![](imgs/.png)
 ![](imgs/.png)
 ![](imgs/.png)
-![](imgs/.png)
-![](imgs/.png)
+
 
 
 
