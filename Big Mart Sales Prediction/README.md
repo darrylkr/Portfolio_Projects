@@ -124,17 +124,93 @@ Supermarket Type2 is their most recent opened outlet.
 I do somemore data cleaning here.  
 ![Missing Values](imgs/null_values.png)
 
+### Item Weight
+![Null Item Weights](imgs/item_weight_null.png)
+As mentioned earlier that the dataset has 1559 unique Item_Identifiers, all outlets should carry the same 1559 items, hence I am checking if the same Item_Identifiers across other stores have their Item_Weight labeled.  
+<br>
+![Item Identifier - FDC37](imgs/item_fdc37.png)
+Item Weight per Item_Identifier is the same across all outlets.  
+Create pivot table to get mean weight per Item_Identifier.  
+
+#### Pivot Item Identifier against Item Weight
+![Item Identifier/Weight Pivot Table](imgs/item_id_weight_pivot.png)
+<br>
+
+![Item Weight Imputation](imgs/item_weight_imputation.png)
+
+![Updated Missing Values](imgs/null_values_new.png)
+<br>
+
+![Updated Item Weight Distribution](imgs/updated_item_weight_distribution.png)
+<br>
+
+### Outlet Size
+![Null Outlet Sizes](imgs/outlet_size_null.png)
+Initially, I thought Outlet_Size might be associated with the Outlet_Location_Type and/or Outlet_Type in that:  
+
+- Larger outlet sizes open up the possibility for more traffic and are likely to have a wider variety of items which can have an effect on sales.  
+- Customers from Tier 1 Cities may have more spending power than Tier 2 and Tier 3 and so placing a large outlet in Tier 1 Cities may be a strategic decision to capitalize on the higher customer spendings to improve sales.  
+After seeing all Outlets apart from Grocery Stores have close to the total unique Item_Identifiers in their outlets and looking at their sales distributions, a clear pattern may not be easily discernible.  
+<br>
+
+Create catplots with Outlet_Size, Outlet_Location_Type and Outlet_Type against Item_Outlet_Sales to see where our 3 outlets with missing Outlet_Size can potentially fit in.  
+![Outlet Size by Outlet_Location_Type](imgs/outlet_size_by_location_type.png)
+<br>
+![Outlet Size by Outlet_Type](imgs/outlet_size_by_outlet_type.png)
+<br>
+We note the insufficient examples in feature combinations to make out any conclusive patterns. However, the most discernable pattern seems to be from differing Outlet_Types, while the Outlet_Size not having any effect on sales.  
+<br>
+
+#### Outlet Size/Type comparison with Outlets with missing Outlet Size values
+![Outlet_Size/Type comparison with Missing Outlet_Size](imgs/outlet_size_type_missing_comparison.png)
+Distribution of Supermarket Type1s are similar in distribution regardless of Outlet_Size.  
+Distribution of Small Grocery Store is the same as OUT010.  
+Check mode of Outlet_Size for Supermarket Type1 for imputation.  
+<br>
+
+Impute Outlet_Size for OUT045 & OUT017 based on the Outlet_Size mode of Supermarket Type1s.
+![Outlet Size imputation based on Supermarket Type 1 Outlet Size mode](imgs/outlet_size_mode_imputation.png)
+<br>
+
+### Item Visibility
+As per the metadata,  
+Item Visibility: The % of total display area of all products in a store allocated to the particular product.  
+The minimum data point of Item_Visibility is 0. Explore this area.  
+
+#### Total Item Visibility per Outlet
+![Total Item Visibility per Outlet](imgs/item_visibility_totals.png)
+Not all 100% of the display area is used per store.  
+
+#### Overview of Zero visibility items
+![Item Visibility Zeros](imgs/item_visibility_zero.png)
+<br>
+
+![Item Visibility FDP33](imgs/item_visibility_zero_fdp33.png)
+Item_Visibility per Item across the different stores have similar Item_Visibility numbers.  
+*OUT010 and OUT019 have slightly higher numbers than the other stores.*  
+<br>
+
+Looking for other examples:  
+![OUT010 & OUT019 Zero Visibility Items](imgs/out010_out019_visibility_zero.png)
+<br>
+
+Item_Identifier FDM39:  
+![Item Visibility FDM39](imgs/item_visibility_zero_fdm39.png)
+OUT010 and OUT019 appears to consistently have different Item_Visibility numbers compared to ALL other Outlet_Identifiers.  
+The distinguishing factor between the two and the rest of the outlets is the Outlet_Type being 'Grocery_Store'.  
+
+
+// impute item visibility 0 with item visibility mean by outlet_type to factor for grocery store visibilities being different //
 
 
 
-
-
-
-
-
-
-
-
+![](imgs/.png)
+![](imgs/.png)
+![](imgs/.png)
+![](imgs/.png)
+![](imgs/.png)
+![](imgs/.png)
+![](imgs/.png)
 
 
 
