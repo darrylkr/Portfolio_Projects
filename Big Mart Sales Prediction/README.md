@@ -77,7 +77,7 @@ I do some cleaning by standardizing the categorizations to 'Low Fat' and 'Regula
 <br>
 
 ![Item Fat Content count](imgs/item_fat_content_counts.png)
-Interestingly, all items have a fat content even if they are not perishables.    
+Interestingly, all items have a fat content even if they are not food related.    
 
 #### Item Type distribution:
 ![Item Type Distribution](imgs/item_type_distribution.png)
@@ -237,11 +237,56 @@ Lastly, we investigate the segment of items with <2000 sales that have more visi
 The items with Item_Visibility > 0.2 are from Outlet_Type 'Grocery Store' as they have fewer items (900+) compared to the supermarkets (1500+).   
 
 ### Item Fat Content
-First we look at the categories in Item_Type:  
+Earlier, we noted that all items have a fat content even if they are not food related. To investigate, we first look at the categories in Item_Type:   
 ![Item Type Categories](imgs/item_type_categories.png)
 <br>
 
+Health and Hygiene is unlikely to be food that have a fat content:  
+![Item Type Health & Hygiene](imgs/item_type_health.png)
+We note the Item_Identifier prefix for Item_Types 'Health & Hygiene'.  
+<br>
 
+![Item Type Health & Hygiene Fat Content](imgs/item_type_health_fat_content.png)
+__All__ 'Health and Hygiene' Item_Types are considered Low Fat even though they are likely inedible.   
+<br>
+
+![Item_Identifier prefixed with 'NC'](imgs/nc_prefix_items.png)
+Item_Type Household, Health & Hygiene & Others all have the prefix 'NC' in their Item_Identifiers.  
+Looking back, there are 2 other prefixes for our Item_Identifiers, 'FD' and 'DR'.  
+<br>
+
+![Item Identifier prefixed with 'FD'](imgs/fd_prefix_items.png)
+These are all Item_Type Food related categories.  
+<br>
+
+![Item Identifier prefixed with 'DR'](imgs/dr_prefix_items.png)
+These are all Item_Type drinks related categories and one dairy category.  
+<br>
+
+#### Correlation Heatmap of our features.
+![Correlation Heatmap](imgs/correlation_heatmap.png)
+Apart from Item_MRP and Item_Visibility to a lower degree, we observe negligible correlation with our target variable sales.
+<br>
+
+## Feature Engineering
+Based on the exploration and data cleaning, I have some things in mind that I would like to change about our data in hopes of making certain features better distinguish our sales:  
+- Set Item Fat Content accordingly for non-food Item_Type items.  
+- Add an outlet age variable based on each outlet's 'Outlet_Establishment_Year'.    
+- Item_Type has 16 different categories with similar sales distribution. Combine some of them together.  
+-   
+
+Looking back at Item_Fat_Content for Item_Identifiers prefixed with 'NC', I set these to 'No Fat Content'.  
+![New Item Fat Content distribution](imgs/item_fat_content_dist_new_2.png)
+Not very distinguishable in terms of sales.  
+<br>
+
+![Outlet Age](imgs/outlet_age.png)
+We use 2013 because this dataset was collected in 2013 as mentioned in the problem statement.  
+
+Recalling that our Item_Identifiers have 3 different prefixes, 'FD', 'DR' and 'NC' which are linked to Item_Types Food, Drinks and Household/Hygiene/Others, we can interpret these prefixes as 'Food', 'Drinks', 'Non-Consumables'.
+![Item Type New](imgs/item_type_new.png)
+<br>
+![Item Type New Distribution](imgs/item_type_new_dist.png)
 
 
 
