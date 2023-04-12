@@ -273,20 +273,53 @@ Based on the exploration and data cleaning, I have some things in mind that I wo
 - Set Item Fat Content accordingly for non-food Item_Type items.  
 - Add an outlet age variable based on each outlet's 'Outlet_Establishment_Year'.    
 - Item_Type has 16 different categories with similar sales distribution. Combine some of them together.  
--   
+- Bin Item_MRP according to the 4 distinctive ranges observed in the distribution.  
 
+### Item Fat Content
 Looking back at Item_Fat_Content for Item_Identifiers prefixed with 'NC', I set these to 'No Fat Content'.  
 ![New Item Fat Content distribution](imgs/item_fat_content_dist_new_2.png)
 Not very distinguishable in terms of sales.  
 <br>
 
+### Outlet Age
 ![Outlet Age](imgs/outlet_age.png)
 We use 2013 because this dataset was collected in 2013 as mentioned in the problem statement.  
 
-Recalling that our Item_Identifiers have 3 different prefixes, 'FD', 'DR' and 'NC' which are linked to Item_Types Food, Drinks and Household/Hygiene/Others, we can interpret these prefixes as 'Food', 'Drinks', 'Non-Consumables'.
+### Item Type New
+Recalling that our Item_Identifiers have 3 different prefixes, 'FD', 'DR' and 'NC' which are linked to Item_Types Food, Drinks and Household/Hygiene/Others, we can interpret these prefixes as 'Food', 'Drinks', 'Non-Consumables'.  
 ![Item Type New](imgs/item_type_new.png)
 <br>
+
 ![Item Type New Distribution](imgs/item_type_new_dist.png)
+Again not very distinguishable in terms of sales.  
+
+### Item MRP binning
+![Item MRP Distribution](imgs/item_mrp_dist.png)
+<br>
+![Item MRP Category Distribution](imgs/item_mrp_category_dist.png)
+Distinguishable in terms of sales. Could be helpful in predicting our sales.  
+<br>
+
+## Pre-processing / Modeling
+I prepare my data for modeling here.  
+![pre-processing code](imgs/preprocessing_code.png)
+Firstly, I split the dataframe into the training sets.   
+Next, I drop the 'Item_Identifier', 'Item_Type' and 'Outlet_Establishment_Year' features as there are 1559 Item_Identifiers, we have 'Item_Type_New' and 'Outlet_Age' in place of 'Item_Type' and 'Outlet_Establishment_Year'.    
+Afterwhich, I one hot encode 'Outlet_Identifier','Item_Fat_Content','Outlet_Size','Outlet_Location_Type','Outlet_Type' and 'Item_Type_New'.    
+Lastly, I do a train-test split of 80-20 on the training data set to get my training and validation sets.  
+
+RMSE will be used as the scoring method for this predictive model.  
+
+### Null model
+I use the mean of sales for all prediction values as a null model.   
+![Null Model](imgs/null_model.png)  
+RMSE of 1702 on train and 1721 on validation.   
+
+### Linear Regression model
+![Linear Regression Model](imgs/LR_model.png)  
+Linear regression gives us a much better RMSE.  
+
+
 
 
 
