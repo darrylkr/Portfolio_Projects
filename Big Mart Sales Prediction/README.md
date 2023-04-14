@@ -353,7 +353,22 @@ With Polynomial features, we introduced a combination of Item_Visibility and Ite
 #### Random Forest model
 I try tree based models to capture any non linearity present in the data.    
 ![Random Forest Model](imgs/random_forest_model.png)  
-Based on the discrepancy between the training and validation R2/RMSE, we can see that the base RF model is severely overfitting the data.  
+Based on the discrepancy between the training and validation R2/RMSE, we can see that the base RF model is severely overfitting the data.    
+<br>
+
+![Random Forest with Hyperparameter Random Search Cross Validation](imgs/rf_rand.png)
+RF_rand train r2: 0.7013258685185819
+RF_rand valid r2: 0.591484530411218
+RF_rand train rmse: 930.3748856593513
+RF_rand valid rmse: 1100.4407749540576
+The random search hyperparameter tuning resulted in an overall better RMSE on the validation set and also a smaller gap between the training/validation sets.  
+<br>
+
+![Cross Validation of the Random Forest with Hyperparameter Random Search model](imgs/rf_rand_cross_val.png)
+
+
+
+
 
 
 
