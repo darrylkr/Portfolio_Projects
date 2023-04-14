@@ -273,7 +273,6 @@ Based on the exploration and data cleaning, I have some things in mind that I wo
 - Set Item Fat Content accordingly for non-food Item_Type items.  
 - Add an outlet age variable based on each outlet's 'Outlet_Establishment_Year'.    
 - Item_Type has 16 different categories with similar sales distribution. Combine some of them together.  
-- Bin Item_MRP according to the 4 distinctive ranges observed in the distribution.  
 
 ### Item Fat Content
 Looking back at Item_Fat_Content for Item_Identifiers prefixed with 'NC', I set these to 'No Fat Content'.  
@@ -293,13 +292,6 @@ Recalling that our Item_Identifiers have 3 different prefixes, 'FD', 'DR' and 'N
 ![Item Type New Distribution](imgs/item_type_new_dist.png)
 Again not very distinguishable in terms of sales.  
 
-### Item MRP binning
-![Item MRP Distribution](imgs/item_mrp_dist.png)
-<br>
-![Item MRP Category Distribution](imgs/item_mrp_category_dist.png)
-Distinguishable in terms of sales. Could be helpful in predicting our sales.  
-<br>
-
 ## Pre-processing / Modeling
 I prepare my data for modeling here.  
 ![pre-processing code](imgs/preprocessing_code.png)
@@ -308,7 +300,7 @@ Next, I drop the 'Item_Identifier', 'Item_Type' and 'Outlet_Establishment_Year' 
 Afterwhich, I one hot encode 'Outlet_Identifier','Item_Fat_Content','Outlet_Size','Outlet_Location_Type','Outlet_Type' and 'Item_Type_New'.    
 Lastly, I do a train-test split of 80-20 on the training data set to get my training and validation sets.  
 
-RMSE will be used as the scoring method for this predictive model.  
+Root Mean Squared Error (RMSE) will be used as the scoring method for this predictive model.  
 
 ### Null model
 I use the mean of sales for all prediction values as a null model.   
@@ -316,10 +308,52 @@ I use the mean of sales for all prediction values as a null model.
 RMSE of 1702 on train and 1721 on validation.   
 
 ### Linear Regression model
-![Linear Regression Model](imgs/LR_model.png)  
-Linear regression gives us a much better RMSE.  
+![Linear Regression Model](imgs/LR_model.png)    
+Linear regression gives us a better RMSE of 1124/1141 for the train/valid sets. They are relatively close together so I don't believe the model to be overfitting.    
+<br>
+![Linear Regression Residual plot](imgs/LR_residual.png)
+The residuals are normally distributed with a slight negative skew of -0.395. However, the residual plot shows a funnel shaped pattern which is an indication of heteroscedasticity (non constant variance in residuals).  
+<br>
+![Linear Regression Coefficients](imgs/LR_coefficients.png)
+Outlet_Type 'Supermarket Type1' and Outlet_Size 'Small' make up the largest positive/negative coefficients in our Linear Regression model for predicting sales which make some sense as Small Outlet_Size is associated with Grocery Stores that have an overall lower amount of sales.  
 
+I try to improve the RMSE by using regularized models:  
 
+#### Ridge Regression model
+![Ridge Regression model](imgs/ridge_model.png)
+Ridge regression gives us just about the same r square and RMSE.  
+![Ridge Regression coefficients](imgs/ridge_coefficients.png)
+We see that the ridge model has shrunk the majority of our feature coefficients to smaller values and given more weight to the more 'important' features. Outlet_Type 'Supermarket Type1' remain at the top but have smaller coefficients, but Item_MRP has greater significance in the ridge regression model.  
+
+#### Lasso Regression model
+![Lasso Regression model](imgs/lasso_model.png)
+Lasso regression gives us a similar r square and RMSE.  
+![Lasso Regression coefficients](imgs/lasso_coefficients.png)  
+We see that the lasso model has shrunk the majority of our feature coefficients to negligible values near 0 and given more weight to the top features.    
+
+#### Log Transformed DV for Linear Regression
+To deal with the heteroscedasticity in our data, I log transform the target variable before doing the linear regression.    
+![Log Transformed Sales LR](imgs/log_transform_LR.png)
+However, the RMSE actually worsened instead.  
+
+#### Polynomial Features
+I look back to my dataset to introduce polynomial features to a degree of 2 for my numerical features.    
+For example, if an input sample is two dimensional and of the form [a, b], the degree-2 polynomial features are [1, a, b, a^2, ab, b^2].    
+![Numerical Features Polynomial Transformation](imgs/polynomial_transformation.png)      
+![Joining polynomial numerical features with remaining data](imgs/polynomial_transformation2.png)      
+<br>
+
+![Ridge model with Polynomial features](imgs/poly_ridge_model.png)    
+RMSE made a miniscule improvement to 1118/1133 for the train/validation scores.  
+<br>
+
+![Ridge coefficients with Polynomial features](imgs/poly_ridge_coefficients.png)   
+With Polynomial features, we introduced a combination of Item_Visibility and Item_MRP that the model found useful. This might be a factor in the improved RMSE score.  
+
+#### Random Forest model
+I try tree based models to capture any non linearity present in the data.    
+![Random Forest Model](imgs/random_forest_model.png)  
+Based on the discrepancy between the training and validation R2/RMSE, we can see that the base RF model is severely overfitting the data.  
 
 
 
@@ -328,10 +362,5 @@ Linear regression gives us a much better RMSE.
 ![](imgs/.png)
 ![](imgs/.png)
 ![](imgs/.png)
-
-
-
-
-
 
 
