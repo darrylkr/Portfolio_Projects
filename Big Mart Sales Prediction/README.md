@@ -356,26 +356,32 @@ I try tree based models to capture any non linearity present in the data.
 Based on the discrepancy between the training and validation R2/RMSE, we can see that the base RF model is severely overfitting the data.    
 <br>
 
-![Random Forest with Hyperparameter Random Search Cross Validation](imgs/rf_rand.png)
-RF_rand train r2: 0.7013258685185819
-RF_rand valid r2: 0.591484530411218
-RF_rand train rmse: 930.3748856593513
-RF_rand valid rmse: 1100.4407749540576
-The random search hyperparameter tuning resulted in an overall better RMSE on the validation set and also a smaller gap between the training/validation sets.  
+Next I hypertune the random forest using a randomized search with cross validation as follows:  
+![Random Forest Hypertuned (Randomized)](imgs/rf_rand.png)   
+<br>
+Using the best model, I perform a cross validation to assess the model's generalization ability on the validation dataset.  
+![Random Forest Hypertuned (Randomized) with Cross Validation scoring](imgs/rf_rand_cv.png)  
+Both the validation R2 and RMSE are within the 95% confidence interval of the 10 fold cross validation score.  
+<br>
+The feature coefficients of the above model:  
+![Random Forest Hypertuned (Randomized) Coefficients](imgs/rf_rand_coefficients.png)  
+The tree ensemble prefers the Item_MRP feature for predicting sales.  
 <br>
 
-![Cross Validation of the Random Forest with Hyperparameter Random Search model](imgs/rf_rand_cross_val.png)
+Next, I do a more extensive hypertuning of the Random Forest by using a full grid search.  
+![Random Forest Hypertuned (Grid)](imgs/rf_grid.png)  
+<br>
+Similarly, I use the best model and perform cross validation to check if the model is able to generalize.  
+![Random Forest Hypertuned (Grid) with Cross Validation scoring](imgs/rf_grid_cv.png)  
+Both the validation R2 and RMSE are within the 95% confidence interval of the 10 fold cross validation score.    
+<br>
+The feature coefficients of the above model:  
+![Random Forest Hypertuned (Grid) Coefficients](imgs/rf_grid_coefficients.png)  
 
+Thus far, our best models are the two Random Forests with RMSEs of 1093.32 and 1098.47.  
+As our models have only been fitted on 80% of the dataset, I join the training and validation datasets and perform the necessary pre-processing for modeling and fit our models on the entire dataset.  
 
-
-
-
-
-
-![](imgs/.png)
-![](imgs/.png)
-![](imgs/.png)
-![](imgs/.png)
-![](imgs/.png)
-
-
+## Conclusion
+With our models trained on the full dataset, I submit all models which are assessed by the competition:  
+![Model score leaderboard](imgs/model_leaderboard.png)
+My best score comes from the Random Forest hypertuned with the randomized search with cross validation - with a score of RMSE 1148.17, it is ranked 380 on the global leaderboard.  
