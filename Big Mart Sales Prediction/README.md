@@ -109,7 +109,7 @@ There are missing Outlet_Size values. Going with mode imputation, we will have m
 <br>
 
 #### Outlet Location Type distribution
-![Outlet Location Type Distribution](outlet_location_type_distribution.png)  
+![Outlet Location Type Distribution](imgs/outlet_location_type_distribution.png)  
 Tier 3 outlets have more items with higer sales on the more extreme end.     
 <br>
 
@@ -126,7 +126,7 @@ This is also the case for the sales distribution for Outlet_Identifier 'OUT010' 
 <br>
 
 #### Outlet Establishment Year/Outlet Type against Sales
-![Outlet Establishment Year/Outlet Type against Item Outlet Sales](outlet_establishment_year_outlet_type_comaprison.png)
+![Outlet Establishment Year/Outlet Type against Item Outlet Sales](imgs/outlet_establishment_year_outlet_type_comaprison.png)    
 We note 1985's Grocery Store and Supermarket Type3's individual distributions and 1998's Grocery Store distribution to be that of 'OUT010' and 'OUT019'.   
 The genesis of Big Mart came with the opening of Supermarket Type3 and a Grocery Store in 1985.    
 2 years later, they opened the first Supermarket Type1.    
@@ -135,26 +135,25 @@ Supermarket Type2 is their most recent opened outlet.
 
 ## Data Cleaning
 I do somemore data cleaning here.  
-![Missing Values](imgs/null_values.png)
+![Missing Values](imgs/null_values.png)  
+<br>
 
 ### Item Weight
-![Null Item Weights](imgs/item_weight_null.png)
+![Null Item Weights](imgs/item_weight_null.png)  
 As mentioned earlier that the dataset has 1559 unique Item_Identifiers, all outlets should carry the same 1559 items, hence I am checking if the same Item_Identifiers across other stores have their Item_Weight labeled.  
 <br>
-![Item Identifier - FDC37](imgs/item_fdc37.png)
+
+![Item Identifier - FDC37](imgs/item_fdc37.png)  
 Item Weight per Item_Identifier is the same across all outlets.  
 Create pivot table to get mean weight per Item_Identifier.  
+<br>
 
 #### Pivot Item Identifier against Item Weight
-![Item Identifier/Weight Pivot Table](imgs/item_id_weight_pivot.png)
+![Item Identifier/Weight Pivot Table](imgs/item_id_weight_pivot.png)  
+![Item Weight Imputation](imgs/item_weight_imputation.png)  
+![Updated Missing Values](imgs/null_values_new.png)  
 <br>
-
-![Item Weight Imputation](imgs/item_weight_imputation.png)
-
-![Updated Missing Values](imgs/null_values_new.png)
-<br>
-
-![Updated Item Weight Distribution](imgs/updated_item_weight_distribution.png)
+![Updated Item Weight Distribution](imgs/updated_item_weight_distribution.png)  
 <br>
 
 ### Outlet Size  
@@ -167,10 +166,10 @@ After seeing all Outlets apart from Grocery Stores have close to the total uniqu
 <br>
 
 Create catplots with Outlet_Size, Outlet_Location_Type and Outlet_Type against Item_Outlet_Sales to see where our 3 outlets with missing Outlet_Size can potentially fit in.  
-![Outlet Size by Outlet_Location_Type](imgs/outlet_size_by_location_type.png)
+![Outlet Size by Outlet_Location_Type](imgs/outlet_size_by_location_type.png)  
 <br>
-![Outlet Size by Outlet_Type](imgs/outlet_size_by_outlet_type.png)
-<br>
+
+![Outlet Size by Outlet_Type](imgs/outlet_size_by_outlet_type.png)  
 We note the insufficient examples in feature combinations to make out any conclusive patterns. However, the most discernable pattern seems to be from differing Outlet_Types, while the Outlet_Size not having any effect on sales.  
 <br>
 
@@ -191,37 +190,38 @@ Item Visibility: The % of total display area of all products in a store allocate
 The minimum data point of Item_Visibility is 0. Explore this area.  
 
 #### Total Item Visibility per Outlet
-![Total Item Visibility per Outlet](imgs/item_visibility_totals.png)
-Not all 100% of the display area is used per store.  
+![Total Item Visibility per Outlet](imgs/item_visibility_totals.png)  
+Not all 100% of the display area is used per store.    
 
 #### Overview of Zero visibility items
-![Item Visibility Zeros](imgs/item_visibility_zero.png)
+![Item Visibility Zeros](imgs/item_visibility_zero.png)  
 <br>
 
-![Item Visibility FDP33](imgs/item_visibility_zero_fdp33.png)
-Item_Visibility per Item across the different stores have similar Item_Visibility numbers.  
-*OUT010 and OUT019 have slightly higher numbers than the other stores.*  
+![Item Visibility FDP33](imgs/item_visibility_zero_fdp33_2.png)  
+Item_Visibility per Item across the different stores have similar Item_Visibility numbers.    
+*OUT010 and OUT019 have slightly higher numbers than the other stores.*    
 <br>
 
-Looking for other examples:  
-![OUT010 & OUT019 Zero Visibility Items](imgs/out010_out019_visibility_zero.png)
+Looking for other examples:    
+![OUT010 & OUT019 Zero Visibility Items](imgs/out010_out019_visibility_zero.png)   
 <br>
 
 Item_Identifier FDM39:  
-![Item Visibility FDM39](imgs/item_visibility_zero_fdm39.png)
+![Item Visibility FDM39](imgs/item_visibility_zero_fdm39.png)   
 OUT010 and OUT019 appears to consistently have different Item_Visibility numbers compared to ALL other Outlet_Identifiers.  
 The distinguishing factor between the two and the rest of the outlets is the Outlet_Type being 'Grocery_Store'.  
+<br>
 
-
-// impute item visibility 0 with item visibility mean by outlet_type to factor for grocery store visibilities being different //
 #### Imputing missing Item Visibility rows with mean from pivot table
-![Item Visibility Mean](imgs/item_visibility_mean_pivot.png)
+![Item Visibility Mean](imgs/item_visibility_mean_pivot.png)   
 <br>
+
 Before imputation:  
-![Item Visibility Zeros](imgs/item_visibility_zero.png)
+![Item Visibility Zeros](imgs/item_visibility_zero.png)  
 <br>
+
 After imputation:  
-![Item Visibility after imputation](imgs/item_visibility_after_impute.png)
+![Item Visibility after imputation](imgs/item_visibility_after_impute.png)  
 <br>
 - All outlets are close to the full display area utilization after mean imputation.     
 - OUT010 and OUT019 having 97% utilization might be the difference due to 'Grocery Store' Outlet_Types usually having a higher visibility % compared to the other Outlet_Types as previously discovered.  
@@ -231,9 +231,10 @@ Try imputation by Outlet_Type/Item_Identifier to see if we can get a total visib
 ![Item Visibility mean by Outlet Type](imgs/item_visibility_mean_by_outlet_type_pivot.png)
 <br>
 
-![Item Visibility after imputing visibility by Outlet Type](imgs/item_visibility_after_impute_outlet_type.png)
-40 Items that couldn't be imputed due to lack of (Grocery Store,Item_Identifier) combination from the other grocery store that makes up the pivot table used for imputation.  
+![Item Visibility after imputing visibility by Outlet Type](imgs/item_visibility_after_impute_outlet_type.png)  
+40 Items that couldn't be imputed due to lack of (Grocery Store,Item_Identifier) combination from the other grocery store that makes up the pivot table used for imputation.    
 These remaining 40 Items will be imputed by the Item_Visibility mean by Item_Identifier.  
+<br>
 
 #### Total Item Visibility per Outlet after all imputations
 ![Item Visibility Totals after all imputations](imgs/item_visibility_totals_new.png)  
@@ -241,43 +242,44 @@ Item_Visibility values are closer to 100% as compared to before.
 <br>
 
 #### Item Visibility Distributions after imputation
-![Item Visibility distribution after imputation](imgs/item_visibility_distribution_after_imputation.png)
+![Item Visibility distribution after imputation](imgs/item_visibility_distribution_after_imputation.png)   
 <br>
 
 #### Item Visibility (0.2 - 0.34)
 Lastly, we investigate the segment of items with <2000 sales that have more visibility (0.2 - 0.34) than the majority of items:  
-![Item Visibility over 0.189](imgs/item_visibility_over_0.189.png)
+![Item Visibility over 0.189](imgs/item_visibility_over_0.189.png)  
 The items with Item_Visibility > 0.2 are from Outlet_Type 'Grocery Store' as they have fewer items (900+) compared to the supermarkets (1500+).   
+<br>
 
 ### Item Fat Content
 Earlier, we noted that all items have a fat content even if they are not food related. To investigate, we first look at the categories in Item_Type:   
-![Item Type Categories](imgs/item_type_categories.png)
+![Item Type Categories](imgs/item_type_categories.png)  
 <br>
 
 Health and Hygiene is unlikely to be food that have a fat content:  
-![Item Type Health & Hygiene](imgs/item_type_health.png)
+![Item Type Health & Hygiene](imgs/item_type_health.png)  
 We note the Item_Identifier prefix for Item_Types 'Health & Hygiene'.  
 <br>
 
-![Item Type Health & Hygiene Fat Content](imgs/item_type_health_fat_content.png)
+![Item Type Health & Hygiene Fat Content](imgs/item_type_health_fat_content.png)  
 __All__ 'Health and Hygiene' Item_Types are considered Low Fat even though they are likely inedible.   
 <br>
 
-![Item_Identifier prefixed with 'NC'](imgs/nc_prefix_items.png)
+![Item_Identifier prefixed with 'NC'](imgs/nc_prefix_items.png)  
 Item_Type Household, Health & Hygiene & Others all have the prefix 'NC' in their Item_Identifiers.  
 Looking back, there are 2 other prefixes for our Item_Identifiers, 'FD' and 'DR'.  
 <br>
 
-![Item Identifier prefixed with 'FD'](imgs/fd_prefix_items.png)
+![Item Identifier prefixed with 'FD'](imgs/fd_prefix_items.png)  
 These are all Item_Type Food related categories.  
 <br>
 
-![Item Identifier prefixed with 'DR'](imgs/dr_prefix_items.png)
+![Item Identifier prefixed with 'DR'](imgs/dr_prefix_items.png)  
 These are all Item_Type drinks related categories and one dairy category.  
 <br>
 
 #### Correlation Heatmap of our features.
-![Correlation Heatmap](imgs/correlation_heatmap.png)
+![Correlation Heatmap](imgs/correlation_heatmap.png)  
 Apart from Item_MRP and Item_Visibility to a lower degree, we observe negligible correlation with our target variable sales.
 <br>
 
@@ -289,27 +291,30 @@ Based on the exploration and data cleaning, I have some things in mind that I wo
 
 ### Item Fat Content
 Looking back at Item_Fat_Content for Item_Identifiers prefixed with 'NC', I set these to 'No Fat Content'.  
-![New Item Fat Content distribution](imgs/item_fat_content_dist_new_2.png)
+![New Item Fat Content distribution](imgs/item_fat_content_dist_new_2.png)  
 Not very distinguishable in terms of sales.  
 <br>
 
 ### Outlet Age
-![Outlet Age](imgs/outlet_age.png)
+![Outlet Age](imgs/outlet_age.png)  
 We use 2013 because this dataset was collected in 2013 as mentioned in the problem statement.  
 
 ### Item Type New
 Recalling that our Item_Identifiers have 3 different prefixes, 'FD', 'DR' and 'NC' which are linked to Item_Types Food, Drinks and Household/Hygiene/Others, we can interpret these prefixes as 'Food', 'Drinks', 'Non-Consumables'.  
-![Item Type New](imgs/item_type_new.png)
+![Item Type New](imgs/item_type_new.png)  
 <br>
 
-![Item Type New Distribution](imgs/item_type_new_dist.png)
+![Item Type New Distribution](imgs/item_type_new_dist.png)  
 Again not very distinguishable in terms of sales.  
+<br>
 
 ## Pre-processing / Modeling
 I prepare my data for modeling here.  
-![pre-processing code](imgs/preprocessing_code.png)
+![pre-processing code](imgs/preprocessing_code.png)  
 Firstly, I split the dataframe into the training sets.   
+<br>
 Next, I drop the 'Item_Identifier', 'Item_Type' and 'Outlet_Establishment_Year' features as there are 1559 Item_Identifiers, we have 'Item_Type_New' and 'Outlet_Age' in place of 'Item_Type' and 'Outlet_Establishment_Year'.    
+<br>
 Afterwhich, I one hot encode 'Outlet_Identifier','Item_Fat_Content','Outlet_Size','Outlet_Location_Type','Outlet_Type' and 'Item_Type_New'.    
 Lastly, I do a train-test split of 80-20 on the training data set to get my training and validation sets.  
 
@@ -317,55 +322,58 @@ Root Mean Squared Error (RMSE) will be used as the scoring method for this predi
 
 ### Null model
 I use the mean of sales for all prediction values as a null model.   
-![Null Model](imgs/null_model.png)  
+![Null Model](imgs/null_model.png)    
 RMSE of 1702 on train and 1721 on validation.   
 
 ### Linear Regression model
 ![Linear Regression Model](imgs/LR_model.png)    
 Linear regression gives us a better RMSE of 1124/1141 for the train/valid sets. They are relatively close together so I don't believe the model to be overfitting.    
 <br>
-![Linear Regression Residual plot](imgs/LR_residual.png)
+![Linear Regression Residual plot](imgs/LR_residual.png)  
 The residuals are normally distributed with a slight negative skew of -0.395. However, the residual plot shows a funnel shaped pattern which is an indication of heteroscedasticity (non constant variance in residuals).  
 <br>
-![Linear Regression Coefficients](imgs/LR_coefficients.png)
+![Linear Regression Coefficients](imgs/LR_coefficients.png)  
 Outlet_Type 'Supermarket Type1' and Outlet_Size 'Small' make up the largest positive/negative coefficients in our Linear Regression model for predicting sales which make some sense as Small Outlet_Size is associated with Grocery Stores that have an overall lower amount of sales.  
+<br>
 
-I try to improve the RMSE by using regularized models:  
-
+I try to improve the RMSE by using regularized models:   
 #### Ridge Regression model
-![Ridge Regression model](imgs/ridge_model.png)
-Ridge regression gives us just about the same r square and RMSE.  
-![Ridge Regression coefficients](imgs/ridge_coefficients.png)
+![Ridge Regression model](imgs/ridge_model.png)    
+Ridge regression gives us just about the same r square and RMSE.    
+<br>
+![Ridge Regression coefficients](imgs/ridge_coefficients.png)    
 We see that the ridge model has shrunk the majority of our feature coefficients to smaller values and given more weight to the more 'important' features. Outlet_Type 'Supermarket Type1' remain at the top but have smaller coefficients, but Item_MRP has greater significance in the ridge regression model.  
+<br>
 
-#### Lasso Regression model
-![Lasso Regression model](imgs/lasso_model.png)
-Lasso regression gives us a similar r square and RMSE.  
-![Lasso Regression coefficients](imgs/lasso_coefficients.png)  
-We see that the lasso model has shrunk the majority of our feature coefficients to negligible values near 0 and given more weight to the top features.    
+#### Lasso Regression model  
+![Lasso Regression model](imgs/lasso_model.png)   
+Lasso regression gives us a similar r square and RMSE.    
+![Lasso Regression coefficients](imgs/lasso_coefficients.png)      
+We see that the lasso model has shrunk the majority of our feature coefficients to negligible values near 0 and given more weight to the top features.      
+<br>
 
 #### Log Transformed DV for Linear Regression
 To deal with the heteroscedasticity in our data, I log transform the target variable before doing the linear regression.    
-![Log Transformed Sales LR](imgs/log_transform_LR.png)
+![Log Transformed Sales LR](imgs/log_transform_LR.png)  
 However, the RMSE actually worsened instead.  
+<br>
 
 #### Polynomial Features
 I look back to my dataset to introduce polynomial features to a degree of 2 for my numerical features.    
 For example, if an input sample is two dimensional and of the form [a, b], the degree-2 polynomial features are [1, a, b, a^2, ab, b^2].    
-![Numerical Features Polynomial Transformation](imgs/polynomial_transformation.png)      
-![Joining polynomial numerical features with remaining data](imgs/polynomial_transformation2.png)      
-<br>
-
-![Ridge model with Polynomial features](imgs/poly_ridge_model.png)    
+![Numerical Features Polynomial Transformation](imgs/polynomial_transformation.png)        
+![Joining polynomial numerical features with remaining data](imgs/polynomial_transformation2.png)         
+![Ridge model with Polynomial features](imgs/poly_ridge_model.png)       
 RMSE made a miniscule improvement to 1118/1133 for the train/validation scores.  
 <br>
 
-![Ridge coefficients with Polynomial features](imgs/poly_ridge_coefficients.png)   
+![Ridge coefficients with Polynomial features](imgs/poly_ridge_coefficients.png)     
 With Polynomial features, we introduced a combination of Item_Visibility and Item_MRP that the model found useful. This might be a factor in the improved RMSE score.  
+<br>
 
 #### Random Forest model
 I try tree based models to capture any non linearity present in the data.    
-![Random Forest Model](imgs/random_forest_model.png)  
+![Random Forest Model](imgs/random_forest_model.png)    
 Based on the discrepancy between the training and validation R2/RMSE, we can see that the base RF model is severely overfitting the data.    
 <br>
 
@@ -393,8 +401,9 @@ The feature coefficients of the above model:
 
 Thus far, our best models are the two Random Forests with RMSEs of 1093.32 and 1098.47.  
 As our models have only been fitted on 80% of the dataset, I join the training and validation datasets and perform the necessary pre-processing for modeling and fit our models on the entire dataset.  
+<br>
 
 ## Conclusion
 With our models trained on the full dataset, I submit all models which are assessed by the competition:  
-![Model score leaderboard](imgs/model_leaderboard.png)
-My best score comes from the Random Forest hypertuned with the randomized search with cross validation - with a score of RMSE 1148.17, it is ranked 380 on the global leaderboard.  
+![Model score leaderboard](imgs/model_leaderboard.png)  
+My best score comes from the Random Forest hypertuned with the randomized search with cross validation - with a score of RMSE 1148.17, it is ranked 380 on the global leaderboard: https://datahack.analyticsvidhya.com/contest/practice-problem-big-mart-sales-iii/#LeaderBoard    
