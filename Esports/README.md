@@ -32,13 +32,11 @@ Using the scraped data from above, I clean the data, use joins, CTEs/Subqueries,
 <ins>Teams Data</ins>    
 Table 1: Top 10 Teams by Prize Money, Tournament count of team, Average Prize per Tournament, Years Active, Tournaments per Year     
 Table 2: Top 10 Teams' History of Prize Winnings by Month/Year  
-<br>
 
 <ins>Countries Data</ins>    
 Table 3: Top 5 Countries by Prize Winnings, Player count of Country, Top Game of Country, Prize for Top Game, Top Game's prize as a percentage of the Country's total Prize Winnings  
 Table 4: Top 5 Countries' History of Prize Winnings and Player count by Month/Year    
 Table 10: Top 10 Countries' History of Prize Winnings as Cumulative Sums per Year  
-<br>
 
 <ins>Games Data</ins>  
 Table 5: Top 5 Games by Largest Prize Pool aggregated to date with Total Tournaments, Unique Players and Years Active   
@@ -46,14 +44,12 @@ Table 6: Top 5 Games' History of Prize Pool and Player/Tournament count by Month
 Table 7: All Games/Genres by Prize Pool, Player/Tournament count aggregated to date    
 Table 8: All Genres by Largest Prize Pool, Total Players and Total Tournaments aggregated to date     
 Table 12: All Games'/Genres' History of by Prize Pool, Player count, Tournament count by Year   
-<br>  
 
 <ins>Players Data</ins>  
 Table 9: Unique Top Players with aggregated Prize Winnings/Tournament count, Game and Demographic Information     
 Table 11: Top Players History of Prize Winnings per Year and their Country/Game      
 Table 13: Number of Years a Top Player has ranked in the Top 500 recurrently   
 Table 14: Last Ranked Player's Prize Winnings in Annual Top 500 Players by Year.  
-<br>
 
 <ins>Other Data</ins>  
 The following data was also used in my Tableau visualisations and is not derived from the SQL database but from online sources:  
@@ -65,7 +61,7 @@ Dataset 5: Esports/Sports Viewership 2022
 <br> 
 
 ## Data Visualisation  
-Interactive Dashboard/Story: [Esports Story](https://public.tableau.com/views/Esports_16739876336460/Esports?:language=en-US&:display_count=n&:origin=viz_share_link)  
+Link to Interactive Dashboard/Story: [Esports Story](https://public.tableau.com/views/Esports_16739876336460/Esports?:language=en-US&:display_count=n&:origin=viz_share_link)  
 <br>
 
 __Cover Page__ 
