@@ -14,14 +14,14 @@ where tournaments = 0
 select count(distinct year)
 from top_teams
 
---table 1 
+--Table 1 
 --top 10 teams by prize money won
 select top 10 team, sum(prize_year) as total_prize, sum(tournaments) as total_tournaments, sum(prize_year)/sum(tournaments) as prize_per_tournament, count (distinct year) as years_active, sum(tournaments)/count (distinct year) as tournaments_per_year
 from top_teams
 group by team
 order by total_prize desc
 
---table 2
+--Table 2
 --top 10 teams history month/year
 with top_10_teams as (
 select top 10 team, sum(prize_year) as total_prize
@@ -59,7 +59,7 @@ order by team, prize desc
 
 ---------------Countries Data Start---------------
 
---table 3
+--Table 3
 --get top 5 countries with highest prize winnings to date
 select top 5 country, prize, players, top_game, prize_top_game, pct_total_prize
 from top_countries
@@ -73,7 +73,7 @@ update top_countries_history
 set country = 'South Korea'
 where country = 'Korea, Republic of'
 
---table 4
+--Table 4
 --get historical data for the top 5 countries 
 with top_5_countries as (
 select top 5 country, prize, players, top_game, prize_top_game, pct_total_prize
@@ -103,9 +103,8 @@ from country_history
 group by country
 order by rank_average, prize desc
 
-select * from top_10_countries
 
---table 10
+--Table 10
 --top 10 countries prize winnings history with their respective cumulative sums per year
 with top_10_countries_history as (
 select country, sum(prize_year) prize, year
@@ -129,7 +128,7 @@ from top_games
 group by game
 order by prize_total desc
 
---table 5
+--Table 5
 --get top 5 games with highest prize to date
 --join all_esport_games table to use total unique players column
 select top 5 game, sum(t.prize) as total_prize, sum(t.tournaments) as total_tournaments, min(a.players) as players, count(distinct year) as years_active
@@ -138,7 +137,7 @@ join all_esport_games a on t.game = a.title
 group by game
 order by total_prize desc, total_tournaments desc
 
---table 6
+--Table 6
 --get top 5 games history of prize/players/tournaments per month/year
 with top_5_games as (
 select top 5 game, sum(prize) as total_prize
@@ -152,10 +151,10 @@ where game in (
 select game from top_5_games)
 order by year, month
 
---table 7
+--Table 7
 select * from all_esport_games
 
---table 8
+--Table 8
 --view the top genres in esports
 select genre, sum(prize) as total_prize, sum(players) as total_players, sum(tournaments) as total_tournaments
 from all_esport_games
@@ -163,7 +162,7 @@ group by genre
 order by total_prize desc, total_tournaments desc
 
 
---table 12
+--Table 12
 --genre's games history of prize/players/tournaments per year
 select t1.game, t2.genre, sum(t1.prize) prize, sum(t1.players) players, sum(t1.tournaments) tournaments, t1.year
 from top_games t1
@@ -190,11 +189,8 @@ update player_profiles
 set game = 'Counter-Strike: Global Offensive'
 where game = 'CS:GO'
 
-select * from top_player_history
-select * from top_players
-select * from player_profiles
 
---table 9: top players with their latest esports data and their demographic information
+--Table 9: top players with their latest esports data and their demographic information
 --using the top players with their total_prize winnings and total_tournaments,
 --join to top_players to get their player_ids and player_names,
 --finally join to player_profiles to get their demographic information.
@@ -232,7 +228,7 @@ on t.player_profile = p.profile_link
 order by t.prize_overall desc
 
 
---table 11
+--Table 11
 --top 10 countries history of player prize winnings per year
 select tp.player_id, tp.prize_year, pp.country, pp.game, tp.year
 from top_players tp
@@ -244,7 +240,7 @@ select country from top_10_countries
 order by year, prize_year desc
 
 
---table 13
+--Table 13
 --number of years from 1998-2022 that a player has ranked in the top 500 in terms of prize winnings
 with table13 as (
 select tp.player_id, tp.player_name, pp.game, count(distinct tp.year) year_count
@@ -266,6 +262,7 @@ from top_players
 group by year
 order by year
 
+--Table 14
 -- from the annual top 500 players by prize winnings, get the last ranked player every year from 1998-2022
 -- to show what the minimum amount of prize winnings did the last of the best make per year
 with top_500_players as (
