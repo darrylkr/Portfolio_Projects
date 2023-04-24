@@ -8,7 +8,7 @@ Python Code: [Notebook](https://github.com/darrylkr/museum_analysis/blob/main/mu
 Project 2: __Netflix Exploratory Data Analysis Project__  
 Documentation: [README](https://github.com/darrylkr/netflix_analysis)  
 Python Code: [Notebook](https://github.com/darrylkr/netflix_analysis/blob/main/netflix.ipynb)  
-Tableau Dashboard: [Netflix Dashboard](https://public.tableau.com/views/Netflix_16783875030960/Netflix?:language=en-US&:display_count=n&:origin=viz_share_link)
+Tableau Dashboard: [Netflix Dashboard](https://public.tableau.com/views/Netflix_16783875030960/Netflix?:language=en-US&:display_count=n&:origin=viz_share_link)  
 <br>
 
 Project 3: __COVID Exploration/Visualisation Project__  
