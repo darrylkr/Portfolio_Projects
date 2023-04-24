@@ -67,27 +67,43 @@ Dataset 5: Esports/Sports Viewership 2022
 ## Data Visualisation  
 Interactive Dashboard/Story: [Esports Story](https://public.tableau.com/views/Esports_16739876336460/Esports?:language=en-US&:display_count=n&:origin=viz_share_link)  
 <br>
-__Cover Page__  
+
+__Cover Page__ 
+---
 ![Cover Page](imgs/cover_page.png)  
 <br>
+
 __Growth of Esports__  
+---
 ![Growth of Esports](imgs/growth_of_esports.png)  
-<br> 
+<br>
+
 __Present Day Peak Esports__  
+---
 ![Present Day Peak Esports](imgs/present_day_esports.png)  
 <br>
+
 __History of Esports Prize Pools__  
+---
 ![History of Esports Prize Pools](imgs/history_esports_prize.png)  
 <br>
+
 __Evolution of Genres__  
+---
 ![Evolution of Genres](imgs/evolution_of_genres.png)  
 <br>
+
 __Competitive Field__  
+---
 ![Competitive Field](imgs/competitive_field.png)  
 <br>
+
 __Key Takeaways__  
+---
 ![Key Takeaways](imgs/key_takeaways.png)  
 <br>
+
 __Sources__  
+---
 ![Sources](imgs/sources.png)  
 <br>
