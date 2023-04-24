@@ -18,7 +18,7 @@ For __Demographics__: \[Player Name, Player Username, Game Title, Age, Country, 
 For __Career History__: \[Year, Prize, Tournament count, Prize as a percentage of Total Prize, Player's Profile (URL)]  
 <br>
 
-Next, I also collect the following data which is aggregated to-date (till Dec 2022): __Top \[Countries, Games/Genre]__.  
+Next, I also collect the following data which is aggregated to date (till Dec 2022): __Top \[Countries, Games/Genre]__.  
 For __Countries__: From https://www.esportsearnings.com/countries, we have the Top Countries by prize money and the number of players who have competed.  
 Data scraped: \[Rank, Country, Prize, Player count, Top Game, Prize for Top Game, Prize for Top Game as a percentage of Total Prize]   
 For __Games/Genre__: From https://www.esportsearnings.com/games/browse-by-genre, we have all esport games grouped by their genres; for each game, their respective aggregated prize pools, player count and tournament count.  
@@ -33,103 +33,21 @@ Using the scraped data from above, I clean the data, use joins, CTEs/Subqueries,
 Table 1: Top 10 Teams by Prize Money, Tournament count of team, Average Prize per Tournament, Years Active, Tournaments per Year     
 Table 2: Top 10 Teams' History of Prize Winnings by Month/Year  
 <br>
+
 <ins>Countries Data</ins>    
 Table 3: Top 5 Countries by Prize Winnings, Player count of Country, Top Game of Country, Prize for Top Game, Top Game's prize as a percentage of the Country's total Prize Winnings  
-Table 4: Top 5 Countries' History of Prize Winnings and Player count by Month/Year  
+Table 4: Top 5 Countries' History of Prize Winnings and Player count by Month/Year    
+Table 10: Top 10 Countries' History of Prize Winnings as Cumulative Sums per Year  
+<br>
 
-
----------------Countries Data Start---------------
-
---table 4
---get historical data for the top 5 countries 
-with top_5_countries as (
-select top 5 country, prize, players, top_game, prize_top_game, pct_total_prize
-from top_countries
-)
-select country, prize_year, players, month, year
-from top_countries_history
-where country in (
-select country from top_5_countries
-)
-order by year, month
-
---number of years of data collected
-select count (distinct year) from top_countries_history
-
---for top 10 countries throughout history
---country_count = number of distinct years a country has won prize money.
---index_average = summation of the ranks a country has ranked at per year divided by country_count.
-create view top_10_countries as
-with country_history as (
-select country, sum(prize_year) prize, year, ROW_NUMBER() over (partition by year order by sum(prize_year) desc) rank_no
-from top_countries_history
-group by country, year
-)
-select top 10 country, sum(prize) prize, sum(rank_no) rank_sum, count(country) country_count, cast(sum(rank_no) / cast(count(country) as decimal(5,2)) as decimal(5,2)) rank_average
-from country_history
-group by country
-order by rank_average, prize desc
-
-select * from top_10_countries
-
---table 10
---top 10 countries prize winnings history with their respective cumulative sums per year
-with top_10_countries_history as (
-select country, sum(prize_year) prize, year
-from top_countries_history
-where country in (
-select country from top_10_countries
-)
-group by country, year
-)
-select *, sum(prize) over (partition by country order by year) cumulative_sum
-from top_10_countries_history
-order by year, prize desc
-
----------------Countries Data End---------------
-
+<ins>Games Data</ins>  
+Table 5: Top 5 Games by Largest Prize Pool aggregated to date with Total Tournaments, Unique Players and Years Active   
+Table 6: Top 5 Games' History of Prize Pool and Player/Tournament count by Month/Year  
+Table 7: All Games/Genres by Prize Pool, Player/Tournament count aggregated to date  
+Table 8: All Genres by Largest Prize Pool, Total Players and Total Tournaments aggregated to date   
+Table 12: 
 
 ----------------Games Data Start----------------
-
-select game, sum(prize) as prize_total
-from top_games
-group by game
-order by prize_total desc
-
---table 5
---get top 5 games with highest prize to date
---join all_esport_games table to use total unique players column
-select top 5 game, sum(t.prize) as total_prize, sum(t.tournaments) as total_tournaments, min(a.players) as players, count(distinct year) as years_active
-from top_games t
-join all_esport_games a on t.game = a.title
-group by game
-order by total_prize desc, total_tournaments desc
-
---table 6
---get top 5 games history of prize/players/tournaments per month/year
-with top_5_games as (
-select top 5 game, sum(prize) as total_prize
-from top_games
-group by game
-order by total_prize desc
-)
-select game, prize, players, tournaments, month, year
-from top_games
-where game in (
-select game from top_5_games)
-order by year, month
-
---table 7
-select * from all_esport_games
-
---table 8
---view the top genres in esports
-select genre, sum(prize) as total_prize, sum(players) as total_players, sum(tournaments) as total_tournaments
-from all_esport_games
-group by genre
-order by total_prize desc, total_tournaments desc
-
-
 --table 12
 --genre's games history of prize/players/tournaments per year
 select t1.game, t2.genre, sum(t1.prize) prize, sum(t1.players) players, sum(t1.tournaments) tournaments, t1.year
