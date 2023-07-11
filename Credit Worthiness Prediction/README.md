@@ -6,7 +6,7 @@ With this dataset, I will analyze the dataset and use visualizations to gain a b
 I will employ prediction models such as the Multilayer Perceptron (MLP), decision tree, support vector machine, naive bayes and logistic regression to compare their effectiveness at predicting customer's credit ratings.  
 
 Dataset: [creditworthiness dataset](data/creditworthiness.csv)    
-R script: [creditworthiness analysis](creditworthiness_prediction.R)    
+R script: [creditworthiness analysis](creditworthiness%20prediction.R)    
 
 ## Metadata  
 The dataset includes 46 customer attributes, with the final attribute (the 47th attribute) representing the assessment outcome, the customer's credit rating.    
