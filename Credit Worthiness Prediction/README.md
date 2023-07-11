@@ -208,34 +208,35 @@ Which gives an accuracy of 63.3%. A slight improvement from the previous model.
 
 Feeding the MLP many variables does not mean it will have higher prediction accuracy. In fact, it could confuse the MLP with many variables with inconclusive associations to the class label.  
 
-#### Decision Tree
+#### Decision Tree  
 ![Decision Tree](imgs/decision_tree.jpg)   
 
 ![Decision Tree](imgs/decision_tree_output.jpg)   
 
-![Decision Tree Confusion Matrix](imgs/decision_tree_confusion_matrix.jpg)
-We get an accuracy of 61.1%, similar to our MLP.  
+![Decision Tree Confusion Matrix](imgs/decision_tree_confusion_matrix.jpg)    
+We get an accuracy of 61.1%, similar to our MLP.    
 
-#### Support Vector Machine  
-![Support Vector Machine](imgs/svm.jpg)   
+#### Support Vector Machine    
+![Support Vector Machine](imgs/svm.jpg)     
 
-![Support Vector Machine Confusion Matrix](imgs/svm_confusion_matrix.jpg)
-We get an accuracy of 58.6%, a little bit lower than our previous models.  
+![Support Vector Machine Confusion Matrix](imgs/svm_confusion_matrix.jpg)  
+We get an accuracy of 58.6%, a little bit lower than our previous models.    
 
-I perform a brute force hypertuning of the SVM using a gridsearch on the cost and gamma parameters.  
-![Support Vector Machine Hypertuning](imgs/svm_hypertuning.jpg)  
+I perform a brute force hypertuning of the SVM using a gridsearch on the cost and gamma parameters.    
+![Support Vector Machine Hypertuning](imgs/svm_hypertuning.jpg)    
 
-![Support Vector Machine Hypertuned Confusion Matrix](imgs/svm_hypertuned_confusion_matrix.jpg)  
-The hypertuned SVM gives an accuracy score of 60.6%, a slight improvement to the default parameters.  
+![Support Vector Machine Hypertuned Confusion Matrix](imgs/svm_hypertuned_confusion_matrix.jpg)    
+The hypertuned SVM gives an accuracy score of 60.6%, a slight improvement to the default parameters.    
 
-#### Naive Bayes  
-![Naive Bayes](imgs/naive_bayes.jpg)   
+#### Naive Bayes    
+![Naive Bayes](imgs/naive_bayes.jpg)     
 
-![Naive Bayes Confusion Matrix](imgs/naive_bayes_confusion_matrix.jpg)  
-We get an accuracy of 34%, a very poor model.  
+![Naive Bayes Confusion Matrix](imgs/naive_bayes_confusion_matrix.jpg)     
+We get an accuracy of 34%, a very poor model.    
 
-### Evaluating our Models / Conclusion
-The decision tree classifier and hypertuned SVM have both a very close accuracy and similar confusion matrices. Overall, the best classifier would be either the decision tree or support vector machine classifier.  
- 
-Another point to note is that credit.rating ‘3’ appears to be consistently misclassified as ‘2’ for all models apart from the naïve bayes model which looks to be classifying every row as credit.rating ‘1’ regardless of the actual credit.rating. Perhaps the features for credit.rating ‘3’ customers are very much similar to that of credit.rating ‘2’ customers, along with the fact that credit.rating ‘2’ is the dominant class in the class distribution as we noted previously:  
+### Evaluating our Models / Conclusion  
+The decision tree classifier and hypertuned SVM have both a very close accuracy and similar confusion matrices. Overall, the best classifier would be either the decision tree or support vector machine classifier.    
+
+Another point to note is that credit.rating ‘3’ appears to be consistently misclassified as ‘2’ for all models apart from the naïve bayes model which looks to be classifying every row as credit.rating ‘1’ regardless of the actual credit.rating.  
+Perhaps the features for credit.rating ‘3’ customers are very much similar to that of credit.rating ‘2’ customers, along with the fact that credit.rating ‘2’ is the dominant class in the class distribution as we noted previously:  
 ![Class Distribution](imgs/3.jpg)  
