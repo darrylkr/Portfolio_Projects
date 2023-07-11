@@ -3,7 +3,7 @@ Banks face the challenge of determining whether a customer is eligible for credi
 To address this, banks utilize data mining methods to classify customers into risk categories, ranging from the highest rating (category A) to the lowest rating (category C).    
 A bank has gathered a dataset consisting of 2500 past credit assessments.  
 With this dataset, I will analyze the dataset and use visualizations to gain a better understanding of its overall properties. This analysis will provide insights into the complexity and challenges associated with predicting customer credit ratings.  
-I will employ prediction models such as the Multilayer Perceptron (MLP), decision tree, random forest, support vector machine, naive bayes and logistic regression to compare their effectiveness at predicting customer's credit ratings.  
+I will employ prediction models such as the Multilayer Perceptron (MLP), decision tree, support vector machine, naive bayes and logistic regression to compare their effectiveness at predicting customer's credit ratings.  
 
 Dataset: [creditworthiness dataset](data/creditworthiness.csv)    
 R script: [creditworthiness analysis](creditworthiness_prediction.R)    
