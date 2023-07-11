@@ -34,3 +34,8 @@ Python Code: [Notebook](Esports/scraper.ipynb)
 SQL Code: [Script](Esports/SQL%20script.sql)  
 Tableau Story: [Esports Dashboards](https://public.tableau.com/views/Esports_16739876336460/Esports?:language=en-US&:display_count=n&:origin=viz_share_link)  
 <br>
+
+Project 7: __Credit Worthiness Data Mining Project__  
+Documentation: [README](Credit%20Worthiness%20Prediction)   
+R Script: [Script](Credit%20Worthiness%20Prediction/creditworthiness%20prediction.R)  
+<br>
