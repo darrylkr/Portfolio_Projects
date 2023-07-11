@@ -115,7 +115,7 @@ Once again, the distribution is rather skewed towards 1. The same logic as befor
 A possibility for there being many Credit Rating C individuals having a good FICO score could be that although they are in a poor credit rating position, they have yet to take loans and not pay the money back, or although they overdraw their balances, they still mange to pay the money back one way or another, hence the bank has no reason to close down their accounts.  
 
 #### Gender    
-![Gender and Credit Rating](imgs/Gender_cr.jpg)    
+![Gender and Credit Rating](imgs/gender_cr.jpg)    
 An evenly distributed attribute. Does not look to be particularly useful in predicting a credit rating group.     
 
 #### Accounts at other Banks  
