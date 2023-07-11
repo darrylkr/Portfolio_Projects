@@ -91,78 +91,91 @@ There is no missing data.
 
 #### Distribution of Class Labels  
 ![Class Distribution](imgs/2.jpg)  
-
 For visualization purposes I will encode the numerical codes to A, B and C.  
+<br>   
+
 #### Distribution of Class Labels Normalized  
 ![Class Distribution Normalized](imgs/3.jpg)  
-
 Credit rating B is nearly twice the size of A and C. We must take this into account when analyzing data distributions of the 45 attributes with regard to credit rating.  
+<br>
 
 ### Bivariate Analysis with Credit Rating  
 #### Functionary  
 ![Functionary and Credit Rating](imgs/func_cr.jpg)  
 B and C have a higher frequency in 0 compared to 1 while A has a higher frequency in 1 compared to 0.  
 Functionary individuals may be more likely to be in credit rating A compared to B and C while non-functionary individuals may be more likely to fall into the category of B or C.  
+<br>  
 
 #### Re-balanaced account  
 ![Re-balanced and Credit Rating](imgs/rebalanced_cr.jpg)  
 Data is quite heavily skewed towards 1 here with few observations falling under 0. I suppose it could be that people who don’t re-balance their overdrawn accounts have their accounts closed/removed from the banks records, hence they won’t have a credit rating in the first place.  
+<br>  
 
 #### FICO  
 ![FICO and Credit Rating](imgs/FICO_cr.jpg)  
 FICO Score is calculated based on a few variables such as payment history, debts, length of credit history, credit mix, new credit, etc. a good FICO score should theoretically indicate a good credit rating.  
 Once again, the distribution is rather skewed towards 1. The same logic as before could apply in that having a poor FICO score could result in the bank closing the customers’ accounts which results in them only keeping customers with a good FICO score.  
 A possibility for there being many Credit Rating C individuals having a good FICO score could be that although they are in a poor credit rating position, they have yet to take loans and not pay the money back, or although they overdraw their balances, they still mange to pay the money back one way or another, hence the bank has no reason to close down their accounts.  
+<br>  
 
 #### Gender    
 ![Gender and Credit Rating](imgs/gender_cr.jpg)    
 An evenly distributed attribute. Does not look to be particularly useful in predicting a credit rating group.     
+<br>  
 
 #### Accounts at other Banks  
 ![Accounts at other Banks and Credit Rating](imgs/accounts_other_bank_cr.jpg)    
 Another somewhat evenly distributed attribute. Does not look to be particularly useful in predicting a credit rating group.    
+<br>  
 
 #### Credit Refused in the Past  
 ![Credit Refused in the Past and Credit Rating](imgs/credit_refused_past_cr.jpg)  
 Individuals with credit rating C appear to be more likely to have their credit refused in the past. This attribute could be helpful in predicting individuals with a credit rating of C.  
+<br>  
 
 #### No. of Years Employed  
 ![No. of Years Employed and Credit Rating](imgs/years_employed_cr.jpg)  
 Another evenly distributed attribute. Does not look to be particularly useful in predicting a credit rating group.  
+<br>  
 
 #### Savings in other Accounts    
 ![Savings in other Accounts and Credit Rating](imgs/savings_other_accounts_cr.jpg)    
 The attribute looks evenly distributed apart from 4, where there are close to no observations for credit rating A and C. This outlier may affect predictions towards individuals whose savings amount in other accounts fall under bin 4.  
+<br>  
 
 #### Self Employed    
 ![Self Employed and Credit Rating](imgs/self_employed_cr.jpg)    
 Almost a perfectly evenly distributed attribute in the ratio 1:2:1 where credit rating B is double of credit rating A and C in both bins 0 and 1. Does not look helpful in predicting a credit rating.  
-
 The remaining attributes are account balances over a timeframe of a year split into months. Individually analyzed, there is unlikely to be interesting insights.   
-
+<br>  
 
 ### Correlation Matrix    
 ![Correlation Matrix](imgs/correlation_matrix.jpg)      
 ![Correlations](imgs/correlation_matrix2.jpg)      
 We observe the attributes with higher correlations with credit rating are: ‘functionary’, ‘re-balance’, ‘FI3O score’, ‘credit refused in past’. These feature likely have higher weightages when it comes to predicting credit ratings.  
 <br>
+
 ## Predictive Modeling  
 ### Multilayer Perceptron  
 ![Train Test Split](imgs/train_test_split.jpg)  
-
 The Multilayer Perceptron has been run with the following different parameters to achieve an optimal result.  
 #x  = number of neurons in hidden layer  
 #(x,y) = 2 hidden layers with x and y being the number of neurons in each layer  
 lr = learning rate  
 lr0.01(47-52) = 47% to 52% accuracy  
 the result is a range of accuracies because they were done on a different number of iterations to achieve the differing results.  
+<br>  
+
 ![Hypertuning MLP](imgs/hypertuning_mlp.jpg)  
+<br>  
 
 I ended up using the following parameters for my final MLP:  
 size=33  
 learnFuncParams=c(0.05)  
 maxit=500  
 Results:  
+<br>  
+
 ![MLP](imgs/mlp1.jpg)  
 
 ![SSE Plot](imgs/45feature_sse_plot.jpg)  
@@ -170,6 +183,7 @@ The black line shows the SSE decreasing as the number of iterations increase, wh
 
 ![Regression Error Plot](imgs/45feature_regression_error.jpg)   
 The plot shows target values on the x-axis and fitted/predicted values on the y-axis. The optimal fit would yield a line through zero with gradient one. This optimal line is shown in black color. A linear fit to the actual data is shown in red color. The fit for the validation data is not a good one.  
+<br>  
 
 ![Confusion Matrix](imgs/45feature_confusion_matrix.jpg)  
 Which gives an accuracy of 49.1%.
@@ -190,22 +204,27 @@ We see the red line's SSE coming down to about 620 before plateauing, remaining 
 
 ![Regression Error Plot 9 Features, 500 Iterations](imgs/9feature_500iter_regression_error.jpg)    
 The red line is a lot closer to the optimal black line which shows an improvement in our model.  
+<br>  
 
 ![Confusion Matrix 9 Features, 500 Iterations](imgs/9feature_500iter_confusion_matrix.jpg)  
 Which gives an accuracy of 60.1%. A huge improvement!  
+<br>  
 
+### More Considerations
 As we noted that the SSE for the validation data started diverging after iteration 300 or so, we can change the MLP's parameter maxit=500 to maxit=300.    
 
-![MLP](imgs/mlp2.jpg)   
+![MLP](imgs/mlp2.jpg)  
 
-![SSE Plot 9 Features, 300 Iterations](imgs/9feature_300iter_sse.jpg)     
+![SSE Plot 9 Features, 300 Iterations](imgs/9feature_300iter_sse.jpg)  
 The red line no longer diverges from the downward trend.  
 
 ![Regression Error Plot 9 Features, 300 Iterations](imgs/9feature_300iter_regression_error.jpg)    
 The red line is even closer to the optimal black line than before, showing an improvement to the previous model.  
+<br>  
 
 ![Confusion Matrix 9 Features, 300 Iterations](imgs/9feature_300iter_confusion_matrix.jpg)  
 Which gives an accuracy of 63.3%. A slight improvement from the previous model.  
+<br>  
 
 Feeding the MLP many variables does not mean it will have higher prediction accuracy. In fact, it could confuse the MLP with many variables with inconclusive associations to the class label.  
 <br>
@@ -218,16 +237,20 @@ Feeding the MLP many variables does not mean it will have higher prediction accu
 
 ![Decision Tree Confusion Matrix](imgs/decision_tree_confusion_matrix.jpg)    
 We get an accuracy of 61.1%, similar to our MLP.    
-
 <br>
+
 ### Support Vector Machine    
+
 ![Support Vector Machine](imgs/svm.jpg)     
 
 ![Support Vector Machine Confusion Matrix](imgs/svm_confusion_matrix.jpg)  
-We get an accuracy of 58.6%, a little bit lower than our previous models.    
 
-I perform a brute force hypertuning of the SVM using a gridsearch on the cost and gamma parameters.    
+We get an accuracy of 58.6%, a little bit lower than our previous models.    
+Next, I perform a brute force hypertuning of the SVM using a gridsearch on the cost and gamma parameters. 
+<br>  
+
 ![Support Vector Machine Hypertuning](imgs/svm_hypertuning.jpg)    
+<br>
 
 ![Support Vector Machine Hypertuned Confusion Matrix](imgs/svm_hypertuned_confusion_matrix.jpg)    
 The hypertuned SVM gives an accuracy score of 60.6%, a slight improvement to the default parameters.    
@@ -241,8 +264,9 @@ We get an accuracy of 34%, a very poor model.
 <br>
 
 ## Evaluating our Models / Conclusion  
-The decision tree classifier and hypertuned SVM have both a very close accuracy and similar confusion matrices. Overall, the best classifier would be either the decision tree or support vector machine classifier.    
+The MLP, decision tree classifier and hypertuned SVM have very similar accuracies and confusion matrices. Another consideration to make when deciding on a model could be the False Positive Rate of predicting credit rating A for customers who want to take large loans because if the model predicts wrongly, the bank is less likely to issue the loan as the model thinks the customer does not have a credit worthiness score of A, when in actual fact, the customer has the means to repay the loan. This would result in the bank losing out on a potential large loan to a customer.  
 
 Another point to note is that credit.rating ‘3’ appears to be consistently misclassified as ‘2’ for all models apart from the naïve bayes model which looks to be classifying every row as credit.rating ‘1’ regardless of the actual credit.rating.  
 Perhaps the features for credit.rating ‘3’ customers are very much similar to that of credit.rating ‘2’ customers, along with the fact that credit.rating ‘2’ is the dominant class in the class distribution as we noted previously:  
 ![Class Distribution](imgs/3.jpg)  
+
