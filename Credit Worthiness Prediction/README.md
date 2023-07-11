@@ -1,4 +1,4 @@
-![image](https://github.com/darrylkr/Portfolio_Projects/assets/72592369/1784676f-f200-4a51-aadc-bbdee5b2ad0f)![image](https://github.com/darrylkr/Portfolio_Projects/assets/72592369/75bce9ee-856d-4378-9fa4-91062512d28f)## Project Overview
+## Project Overview
 Banks face the challenge of determining whether a customer is eligible for credit/loans.    
 To address this, banks utilize data mining methods to classify customers into risk categories, ranging from the highest rating (category A) to the lowest rating (category C).    
 A bank has gathered a dataset consisting of 2500 past credit assessments.  
