@@ -145,9 +145,9 @@ The remaining attributes are account balances over a timeframe of a year split i
 ![Correlation Matrix](imgs/correlation_matrix.jpg)      
 ![Correlations](imgs/correlation_matrix2.jpg)      
 We observe the attributes with higher correlations with credit rating are: ‘functionary’, ‘re-balance’, ‘FI3O score’, ‘credit refused in past’. These feature likely have higher weightages when it comes to predicting credit ratings.  
-
-### Predictive Modeling  
-#### Multilayer Perceptron  
+<br>
+## Predictive Modeling  
+### Multilayer Perceptron  
 ![Train Test Split](imgs/train_test_split.jpg)  
 
 The Multilayer Perceptron has been run with the following different parameters to achieve an optimal result.  
@@ -173,12 +173,13 @@ The plot shows target values on the x-axis and fitted/predicted values on the y-
 
 ![Confusion Matrix](imgs/45feature_confusion_matrix.jpg)  
 Which gives an accuracy of 49.1%.
+<br>
 
-#### Considerations
+### Considerations
 As we recall in our Bivariate analysis, we noted that the account balances over different time frames with credit ratings did not prove to be particularly distinctive unlike other features such as functionary, Re-balanaced account and FICO score. Let's try reducing the number of features we are feeding the MLP with by removing the account balance over time features.   
+<br>
 
-
-#### Re-train MLP with 9 Features  
+### Re-train MLP with 9 Features  
 ![Train Test Split with 9 Features](imgs/train_test_split2.jpg)  
 
 Now we re-train the MLP with the same parameters from before.  
@@ -207,8 +208,10 @@ The red line is even closer to the optimal black line than before, showing an im
 Which gives an accuracy of 63.3%. A slight improvement from the previous model.  
 
 Feeding the MLP many variables does not mean it will have higher prediction accuracy. In fact, it could confuse the MLP with many variables with inconclusive associations to the class label.  
+<br>
 
-#### Decision Tree  
+### Decision Tree  
+
 ![Decision Tree](imgs/decision_tree.jpg)   
 
 ![Decision Tree](imgs/decision_tree_output.jpg)   
@@ -216,7 +219,8 @@ Feeding the MLP many variables does not mean it will have higher prediction accu
 ![Decision Tree Confusion Matrix](imgs/decision_tree_confusion_matrix.jpg)    
 We get an accuracy of 61.1%, similar to our MLP.    
 
-#### Support Vector Machine    
+<br>
+### Support Vector Machine    
 ![Support Vector Machine](imgs/svm.jpg)     
 
 ![Support Vector Machine Confusion Matrix](imgs/svm_confusion_matrix.jpg)  
@@ -227,14 +231,16 @@ I perform a brute force hypertuning of the SVM using a gridsearch on the cost an
 
 ![Support Vector Machine Hypertuned Confusion Matrix](imgs/svm_hypertuned_confusion_matrix.jpg)    
 The hypertuned SVM gives an accuracy score of 60.6%, a slight improvement to the default parameters.    
+<br>
 
-#### Naive Bayes    
+### Naive Bayes    
 ![Naive Bayes](imgs/naive_bayes.jpg)     
 
 ![Naive Bayes Confusion Matrix](imgs/naive_bayes_confusion_matrix.jpg)     
 We get an accuracy of 34%, a very poor model.    
+<br>
 
-### Evaluating our Models / Conclusion  
+## Evaluating our Models / Conclusion  
 The decision tree classifier and hypertuned SVM have both a very close accuracy and similar confusion matrices. Overall, the best classifier would be either the decision tree or support vector machine classifier.    
 
 Another point to note is that credit.rating ‘3’ appears to be consistently misclassified as ‘2’ for all models apart from the naïve bayes model which looks to be classifying every row as credit.rating ‘1’ regardless of the actual credit.rating.  
